@@ -1,0 +1,32 @@
+<!-- <p>product-list works!</p>
+<div *ngFor="let tempProduct of Products">
+    {{ tempProduct.name}} :price {{ tempProduct.unitPrice | currency:'INR'}}
+</div>
+<b>Above unstructured data has been structured into table. The data is coming from spring boot and in spring boot
+    Data is coming from postgres database...
+</b>
+
+<br> -->
+<div class="container">
+    <table class="table" style="font-weight: 100; font-family:'Courier New', Courier, monospace">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Units in Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tempProduct of Products" >
+                <td class="align-middle">
+                    <img src="{{ tempProduct.imageUrl }}" height="50"/>
+                </td>
+                <td class="align-middle">{{ tempProduct.name }}</td>
+                <td class="align-middle">{{ tempProduct.unitPrice }}</td>
+                <td class="align-middle">{{  tempProduct.unitsInStock }} </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>
