@@ -1,0 +1,12 @@
+<!-- <p>product-category-menu works!</p> -->
+<div class="menu-sidebar-content js-scrollbar1">
+    <nav class="navbar-sidebar">
+    <ul class="list-unstyled navbar-list">
+
+        <li *ngFor="let tProductCategory of productCategories">
+            <a class="active-link" href="/category/{{ tProductCategory.id }}">{{ tProductCategory.categoryName}}</a>
+        </li>
+        
+    </ul>
+</nav>
+</div>

@@ -1,0 +1,15 @@
+<!-- <p>product-details works!</p> -->
+<div class="detail-section">
+    <div class="container-fluid">
+        <img src="{{ products?.imageUrl }}" class="detail-img">
+        <h3> {{ products?.name}} </h3>
+        <div class="price">
+            {{ products?.unitPrice | currency : "INR" }}
+        </div>
+        <a href="#" class="primary-btn">Add to Cart</a>
+        <hr>
+        <h1>Description</h1>
+        <h4>{{ products?.description }} </h4>
+        <a href="/products" class="primary-btn">Back to Home Page</a>
+    </div>
+</div>

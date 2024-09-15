@@ -1,0 +1,35 @@
+a.active-link {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: aqua;
+}
+
+a {
+    background-blend-mode: color-burn;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    font-style: inherit;
+    text-decoration: none;
+}
+
+div.product-box {
+    padding: 1;
+    box-shadow: inset;
+}
+
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    font-style: width;
+    font: 100;
+}
+
+div.price {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h4,span{
+    font-family: 'Courier New', Courier, monospace;
+    font-style: width;
+    font: 100;
+    font-weight: bolder;
+}
+
