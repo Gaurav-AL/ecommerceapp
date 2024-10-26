@@ -6,16 +6,16 @@
             <!-- loop over the content of the row of Products-->
             <div *ngFor="let tproducts of Products" class="col-md-3">
                 <div class="product-box">
-                    <a href="/products/{{ tproducts.id }}" >
+                    <a [routerLink]="[ '/products', tproducts.id  ]">
                         <img src="{{ tproducts.imageUrl }}" class="image-responsive" />
                     </a>
-                    <a href="/products/{{ tproducts.id }}">
+                    <a [routerLink]="[ '/products', tproducts.id  ]">
                         <h1>{{ tproducts.name }}</h1>
                     </a>
                     <div class="price">
                         {{ tproducts.unitPrice | currency : "INR" }}
                     </div>
-                    <a href="#" class="primary-btn">Add to Cart</a>
+                    <button (click)="addToCart(tproducts)" class="btn btn-primary sm mt-7" style="color:black;background-color:#61e311;; font-family:'Courier New', Courier, monospace;font-weight:bolder;padding:5px">Add to Cart</button>
                 </div>
             </div>
             </div>
@@ -27,6 +27,7 @@
                 No Products Found  <span>{{ searchKeyword }}</span> :(
             </div>
             <!-- Begin Footer -->
+            <!-- Pagination -->
             <div class="footer-pagination">
                 <div class="row">
                     <div class="col-md-6"></div>
@@ -36,10 +37,22 @@
                                 <ngb-pagination [(page)]="pageNumber"
                                                 [collectionSize]="totalElements"
                                                 [pageSize]="pageSize"
+                                                [maxSize]="5"
+                                                [boundaryLinks]="true"
                                                 (pageChange)="listProducts()">
 
                                 </ngb-pagination>
                             </div>
+                        <div class="col-md-3 mt-2" style="text-align: right;">
+                            <span class="mr-2">Page Size</span>
+                            <select #myPageSize (change)="updatePageSize(myPageSize.value)">
+                                <option select="true">5</option>
+                                <option select="true">10</option>
+                                <option select="true">15</option>
+                                <option select="true">30</option>
+                            </select>
+
+                        </div>
                         </div>
                     </div>
                 </div>

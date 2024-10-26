@@ -1,0 +1,71 @@
+<!-- <p>cart-details works!</p> -->
+<div class="main-content"> 
+    <div class="section-content section-content-p30">
+        <div class = "container-fluid">
+            <div *ngIf="cartItems?.length">
+                <table class = "table table-bordered">
+                    <tr>
+                        <th width="20%">Product Image</th>
+                        <th width="50%">Product Description</th>
+                        <th width="30%"></th>
+                    </tr>
+                    <tr *ngFor="let tCartItems of cartItems">
+                        <td>
+                            <img src="{{ tCartItems?.imageUrl }}">
+                        </td>
+                        <td>
+                            <p style="color: brown;">{{tCartItems.name}}</p><br>
+                            <p style="color: brown;">{{tCartItems.unitPrice | currency : 'INR'}}</p>
+                        </td>
+                        <td>
+                            <div class="items">
+                                <div class = "col">
+                                    <label> Total Quantity : </label>
+                                        <!-- <div *ngIf="tCartItems!.quantity > 0" class="row no-guttter"> -->
+                                        <div class="row no-guttter">
+                                            <div class = "col" >
+                                                <button (click)="incrementQuantity(tCartItems)" class="btn btn-primary btn-sm" id="plus">
+                                                    <i  class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col ml-4 mr-2">
+                                                {{ tCartItems.quantity}}
+                                            </div>
+                                            <button (click)="decrementQuantity(tCartItems)" class = "col" >
+                                                <div class="btn btn-primary btn-sm" id = "minus" >
+                                                    <i class="fa fa-minus"></i>
+                                                </div>
+                                            <div class = "col-8"></div>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="container-fluid row">
+                                    <button id = "removeFromCart"(click)="remove(tCartItems)" class="btn sm mt-4" ><span>Remove From Cart</span></button>
+                                </div>
+                                <label> Total Price :</label> <span>{{ tCartItems.quantity * tCartItems.unitPrice | currency:'INR'}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td font-weight="bolder">
+                            <label>Total Quantity</label> : 
+                                    <span>{{ totalQuantityDetails }}</span> 
+                            <br>
+                            <label>Total Price</label> : <span>{{ totalPriceDetails | currency :'INR'}}</span> <br>
+                            <label>Shipping Charges : <span>FREE</span></label> 
+                            <div class="row container-fluid" style="display:right">
+                                <a routerLink="/checkout" class="btn btn-primary sm mt-6" id="checkout"> Check-Out </a>
+                            </div>
+                        </td>
+                    </tr>   
+                </table>
+            </div>
+            <div *ngIf="cartItems!.length == 0">
+                <p class="empty-cart-message">!!!!!!! Cart is empty !!!!!!!</p>
+            </div>
+        </div>
+    </div>
+    <a [routerLink]="[ '/products']" class="primary-btn">Back to Home Page</a>
+</div>
+

@@ -6,4 +6,13 @@ li{
 a{
     text-decoration: none;
 }
-
+.menu-sidebar-content{
+    /* background-color:rgb(91, 100, 9); */
+    background-color: transparent;
+    /* border: 2px solid #003366; */
+    color: #003366;
+    padding: 10px 20px;
+    /* border-radius: 5px; */
+    transition: background-color 0.3s ease;
+    font-weight: bolder;
+}

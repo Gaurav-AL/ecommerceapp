@@ -1,0 +1,346 @@
+<!-- <p>checkout works!</p> -->
+<div class="main-content page-m">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <form [formGroup]="checkOutFormGroup" (ngSubmit)="onSubmit()">
+                <!-- Customer Form Group -->
+                <div formGroupName="customer" class="form-area">
+                    <h3>Customer Input</h3>
+                    <!-- Customer Form Fields -->
+                    <!-- ... (customer input fields remain unchanged) -->
+                    <div class="row">
+                        <div class="col-md-3"><label>First Name: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="firstName" type="text" [placeholder]="firstNamePlaceholder">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><label>Last Name: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="lastName" type="text" [placeholder]="lastNamePlaceholder">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><label>Email: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="email" type="text" [placeholder]="emailPlaceholder">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><label>Mobile Num: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="mobileNo" type="text" [placeholder]="mobileNoPlaceholder">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Details -->
+                <div formGroupName="shippingAddress" class="form-area">
+                    <h3>Shipping Address Details</h3>
+                    <!-- Shipping Details Fields -->
+                    <!-- ... (shipping address fields remain unchanged) -->
+                    <div class="row">
+                        <div class="col-md-3"><label>Country: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="countryName" placeholder="Country">
+                                    <option>India</option>
+                                    <!-- Add more options here -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><label>State: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <select  formControlName="selectedState" placeholder="State">
+                                    <<option *ngFor="let state of states" [value]="state">{{ state }}</option>
+                                    <!-- Add more options here -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><label>District: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="districtName" type="text" placeholder="District">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><label>Street Address: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="streetAddress" type="text" placeholder="Street Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><label>Pincode: </label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="pincode" type="text" placeholder="Pincode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option for Billing Address -->
+                <div>
+                    <div *ngIf="showRadioButtons" class="radio-buttons">
+                        <div>
+                            <input type="radio" formControlName="selectedOption" value="show">
+                            <label for="show"><span>Is Billing Address Different from Shipping Address?</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conditional Billing Address -->
+                <div *ngIf="checkOutFormGroup.get('selectedOption')?.value === 'show'">
+                    <div style="height: 50px;"></div>
+                    <div formGroupName="billingAddress" class="form-area">
+                        <h3>Billing Address Details</h3>
+                        <!-- Billing Address Fields -->
+                        <!-- ... (billing address fields remain unchanged) -->
+                        <div class="row">
+                            <div class="col-md-3"><label>Country: </label></div>
+                            <div class="col-md-9">
+                                <div class="input-space">
+                                    <select formControlName="countryName" placeholder="Country">
+                                        <option>India</option>
+                                        <!-- Add more options here -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>State: </label></div>
+                            <div class="col-md-9">
+                                <div class="input-space">
+                                    <select formControlName="selectedState" placeholder="State">
+                                        <<option *ngFor="let state of states" [value]="state">{{ state }}</option>
+                                        <!-- Add more options here -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>District: </label></div>
+                            <div class="col-md-9">
+                                <div class="input-space">
+                                    <input formControlName="districtName" type="text" placeholder="District">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>Street Address: </label></div>
+                            <div class="col-md-9">
+                                <div class="input-space">
+                                    <input formControlName="streetAddress" type="text" placeholder="Street Address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>Pincode: </label></div>
+                            <div class="col-md-9">
+                                <div class="input-space">
+                                    <input formControlName="pincode" type="text" placeholder="Pincode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-- Payment Information -->
+                    <div style="height: 50px;"></div>
+                    <div class="row">
+                        <div class="container-fluid mb-3">
+                        <label for="paymentMethod">Payment Method:</label>
+                        <select id="paymentMethod" formControlName="selectedPaymentMethod">
+                            <option value="upi" for="upi">UPI</option>
+                            <option value="debitCard">Debit Card</option>
+                            <option value="creditCard">Credit Card</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class = "section-content section-content-p30">
+                        <!-- UPI Payment Info -->
+                        <div style="height: 50px;"></div>
+                        <div *ngIf="checkOutFormGroup.get('selectedPaymentMethod')?.value === 'upi'" formGroupName="upi" class="form-area">
+                        <h3>UPI Payment</h3>
+                        <div class="row">
+                            <div class="col-md-3"><label>UPI ID:</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="upiId" type="text" placeholder="UPI Id">
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    
+                        <!-- Debit Card Payment Info -->
+                        <div *ngIf="checkOutFormGroup.get('selectedPaymentMethod')?.value === 'debitCard'" formGroupName="debitCard" class="form-area">
+                        <h3>Debit Card Payment</h3>
+                        <div class="row">
+                            <div class="col-md-6"><label>Debit Card Type</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="debitCardType">
+                                <option>SBI</option>
+                                <option>ICICI</option>
+                                <option>HDFC</option>
+                                <option>Axis</option>
+                                </select>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- Other debit card fields remain unchanged -->
+                        <div class="row">
+                            <div class="col-md-6"><label>Name On Debit Card</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="nameOnDebitCard" type="text">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>Card Number</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="debitCardNumber" type="text">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>CVV :</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="cvv" type="password">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>PIN :</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="pin" type="password">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>Valid From :</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="validFrom" type="date">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>Valid Till :</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="validTill" type="date">
+                            </div>
+                        </div>
+                        </div>
+                        <!-- Other debit card fields -->
+                        </div>
+                    
+                        <!-- Credit Card Payment Info -->
+                        <div *ngIf="checkOutFormGroup.get('selectedPaymentMethod')?.value === 'creditCard'" formGroupName="creditCard" class="form-area">
+                        <h3>Credit Card Payment</h3>
+                        <div class="row">
+                            <div class="col-md-6"><label>Credit Card Type</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="creditCardType">
+                                <option>SBI</option>
+                                <option>ICICI</option>
+                                <option>HDFC</option>
+                                <option>Axis</option>
+                                </select>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- Other credit card fields remain unchanged -->
+                        <div class="row">
+                            <div class="col-md-6"><label>Name On Credit Card</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="nameOnCreditCard" type="text">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>Card Number</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="creditCardNumber" type="text">
+                            </div>
+                            </div>
+                        </div>
+                        <!-- Other credit card fields -->
+                        <div class="row">
+                            <div class="col-md-3"><label>Card Number</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="creditCardNumber" type="text">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>CVV :</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="cvv" type="password">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>PIN :</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="pin" type="password">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>Valid From :</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="validFrom" type="date">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"><label>Valid Till :</label></div>
+                            <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="validTill" type="date">
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="submit btn btn-info" >
+                        Review Your Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <a [routerLink]="[ '/products']" class="primary-btn">Back to Home Page</a>
+</div>

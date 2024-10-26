@@ -1,6 +1,5 @@
-h4,h2,h3,a{
+/* h4,h2,h3,a{
     text-decoration: none;
-    font-size: large;
     font-family: 'Courier New', Courier, monospace;
 }
 a{
@@ -11,4 +10,95 @@ h1{
     font-size: large;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
+}
+
+.btn-primary {
+    background-color: #003366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ff6347;
+} */
+.detail-section {
+    background-color: #f9f9f9; /* Light background for contrast */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 800px; /* Limiting width for better readability */
+    margin: 20px auto; /* Centering the section */
+}
+
+.container-fluid {
+    text-align: center; /* Center-aligning text */
+}
+
+.detail-img {
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for image */
+    margin-bottom: 20px; /* Spacing below the image */
+}
+
+h3 {
+    font-size: 24px; /* Larger font size for the product name */
+    color: #333; /* Dark text for better readability */
+    margin-bottom: 10px; /* Space below the heading */
+}
+
+.price {
+    font-size: 20px; /* Font size for the price */
+    font-weight: bold; /* Bold font weight */
+    color: #007bff; /* Bootstrap primary color for prices */
+    margin-bottom: 20px; /* Space below the price */
+}
+
+.btn {
+    padding: 10px 20px; /* Padding for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */
+}
+
+.btn-primary {
+    background-color: #078743; /* Custom button color */
+    color: white; /* White text */
+    border: none; /* No border */
+}
+
+.btn-primary:hover {
+    background-color: #05a232; /* Darker shade on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+hr {
+    margin: 30px 0; /* Space around the horizontal rule */
+}
+
+h1 {
+    font-size: 28px; /* Heading size for description */
+    color: #333; /* Dark color for contrast */
+    margin-bottom: 10px; /* Space below the heading */
+}
+
+h4 {
+    font-size: 18px; /* Font size for description */
+    color: #555; /* Slightly lighter color for description */
+    line-height: 1.5; /* Better line spacing for readability */
+    margin-bottom: 20px; /* Space below the description */
+}
+
+.primary-btn {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text */
+    padding: 10px 15px; /* Button padding */
+    border-radius: 5px; /* Rounded corners for buttons */
+    text-decoration: none; /* No underline on links */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.primary-btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
 }

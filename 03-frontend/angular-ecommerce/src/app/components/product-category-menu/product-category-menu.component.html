@@ -1,10 +1,10 @@
 <!-- <p>product-category-menu works!</p> -->
-<div class="menu-sidebar-content js-scrollbar1">
-    <nav class="navbar-sidebar">
-    <ul class="list-unstyled navbar-list">
+<div class="menu-sidebar-content" >
+    <nav style="background-color: transparent;">
+    <ul class="list-unstyled ">
 
         <li *ngFor="let tProductCategory of productCategories">
-            <a class="active-link" href="/category/{{ tProductCategory.id }}">{{ tProductCategory.categoryName}}</a>
+            <a [routerLink]="['/category', tProductCategory.id ]">{{ tProductCategory.categoryName }}</a>
         </li>
         
     </ul>

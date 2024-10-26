@@ -1,6 +1,6 @@
-a.active-link {
+/* a.active-link {
     font-family: 'Courier New', Courier, monospace;
-    background-color: aqua;
+    background-color: rgb(24, 62, 62);
 }
 
 a {
@@ -22,6 +22,7 @@ h1{
     font: 100;
 }
 
+
 div.price {
     font-family: 'Courier New', Courier, monospace;
 }
@@ -31,5 +32,109 @@ h4,span{
     font-style: width;
     font: 100;
     font-weight: bolder;
+} */
+/* Main Content Styles */
+.main-content {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light grey background for better contrast */
+}
+
+/* Section Content */
+.section-content {
+    margin-top: 20px;
+}
+
+/* Category Header */
+h4 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Product Grid */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Product Box Styles */
+.product-box {
+    background-color: #fff; /* White background for product boxes */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    margin: 15px; /* Spacing between product boxes */
+    padding: 15px; /* Padding inside product boxes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center; /* Center-align text */
+}
+
+.product-box img {
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Product Title */
+.product-box h1 {
+    font-size: 1.2em; /* Slightly larger font size for product name */
+    color: #007bff; /* Primary color for titles */
+    margin: 10px 0; /* Margin around the title */
+}
+
+/* Price Styles */
+.price {
+    font-size: 1.1em; /* Slightly larger font for price */
+    color: #28a745; /* Green color for price */
+    margin: 10px 0; /* Margin around the price */
+}
+
+/* Button Styles */
+.btn {
+    background-color: #61e311; /* Bright green background */
+    color: black; /* Black text */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for button text */
+    font-weight: bolder; /* Bold text */
+    padding: 10px 15px; /* Padding around the button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.btn:hover {
+    background-color: #5dc11e; /* Darker green on hover */
+}
+
+/* Alert Styles for No Products Found */
+.alert {
+    margin-top: 20px; /* Margin above alert */
+}
+
+/* Footer Pagination Styles */
+.footer-pagination {
+    margin-top: 30px; /* Margin above footer */
+}
+
+.footer-pagination select {
+    padding: 5px; /* Padding inside select box */
+}
+.product-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+}
+
+.product-box:hover {
+    transform: scale(1.05); /* Slightly enlarge the product box */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Increase shadow for depth effect */
+    background-color: #bdeca6; /* Change background color on hover */
+    border-color: #e3e7eb; /* Change border color to primary */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .col-md-3 {
+        flex: 0 0 100%; /* Full width on small screens */
+        max-width: 100%; /* Ensure max width is 100% */
+    }
+
+    .footer-pagination {
+        text-align: center; /* Center-align footer content */
+    }
 }
 

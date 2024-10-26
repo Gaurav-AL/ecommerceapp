@@ -1,0 +1,30 @@
+.header-desktop,.logo{
+    background-color: transparent;
+    /* border: 2px solid #003366; */
+    /* color: #003366; */
+    /* padding: 10px 20px; */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    /* margin:1%; */
+}
+
+/* Add margin to the page container to prevent it from hiding behind the header */
+.page-container {
+    margin-top: 80px; /* Adjust this value according to the height of your header */
+    /* Alternatively, you can use padding-top */
+    padding-top: 10px; /* Add padding for aesthetics */
+}
+
+.header-desktop {
+    position: fixed; /* Fix the header at the top */
+    top: 0; /* Align to the top */
+    width: 88%; /* Full width */
+    z-index: 1000; /* Ensure it stays above other content */
+    transition: top 0.3s; /* Smooth transition for hiding/showing */
+}
+
+/* This class will be added/removed based on scroll position */
+.header-hidden {
+    top: -100px; /* Adjust this value to hide the header */
+}
+

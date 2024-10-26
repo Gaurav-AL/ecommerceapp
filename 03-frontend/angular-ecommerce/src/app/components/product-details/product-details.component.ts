@@ -4,6 +4,8 @@ import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { CartItems } from '../../common/cart-items';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -15,13 +17,14 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class ProductDetailsComponent implements OnInit{
 
+
   products: Product | undefined;
+
 
   // Injecting productService and activatedRoute dependency
   constructor(private productService: ProductService,
-              private activateRoute: ActivatedRoute){
-
-  }
+              private activateRoute: ActivatedRoute,
+              private cartServices: CartService){}
   ngOnInit(): void {
     this.activateRoute.paramMap.subscribe(()=>
     {
@@ -38,5 +41,10 @@ export class ProductDetailsComponent implements OnInit{
       this.products = data;
     })
   }
-
+  /* Adding to cart implementation*/
+  addToCart(ProductList: Product) {
+    console.log(`Add to cart ${ProductList.name}, ${ProductList.unitPrice}`);
+    const cartItem = new CartItems(ProductList);
+    this.cartServices.addToCart(cartItem);
+  }
 }

@@ -6,10 +6,10 @@
         <div class="price">
             {{ products?.unitPrice | currency : "INR" }}
         </div>
-        <a href="#" class="primary-btn">Add to Cart</a>
+        <button (click)="addToCart(products!)" class="btn btn-primary sm mt-8" style="background-color: #078743;; font-family:'Courier New', Courier, monospace;font-weight:bolder">Add to Cart</button>
         <hr>
         <h1>Description</h1>
         <h4>{{ products?.description }} </h4>
-        <a href="/products" class="primary-btn">Back to Home Page</a>
+        <a [routerLink]="[ '/products']" class="primary-btn">Back to Home Page</a>
     </div>
 </div>
