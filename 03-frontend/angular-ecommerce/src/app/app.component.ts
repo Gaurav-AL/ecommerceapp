@@ -7,11 +7,14 @@ import { SearchComponent } from "./components/search/search.component";
 import { CartStatusComponent } from "./components/cart-status/cart-status.component";
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { LoginComponent } from "./components/login/login.component";
+import { LogoComponent } from "./components/logo/logo.component";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductListComponent, HttpClientModule, ProductCategoryMenuComponent, SearchComponent, CartStatusComponent, RouterModule, CommonModule],
+  imports: [RouterOutlet, ProductListComponent, HttpClientModule, ProductCategoryMenuComponent, SearchComponent, CartStatusComponent, RouterModule, CommonModule, LoginComponent, LogoComponent],
   templateUrl: './app.component.html',
   // template: '<router-outlet></router-outlet>',
   styleUrls: ['./app.component.css'],

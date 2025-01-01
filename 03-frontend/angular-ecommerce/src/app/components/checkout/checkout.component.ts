@@ -11,6 +11,8 @@ import { CartService } from '../../services/cart.service';
 import { CheckOutServicesService } from '../../services/check-out-services.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentService } from '../../services/payment.service';
+import { ShopchatService } from '../../services/shopchat.service';
+import { Console } from 'node:console';
 
 @Component({
   selector: 'app-checkout',
@@ -28,6 +30,13 @@ export class CheckoutComponent implements OnInit {
     emailPlaceholder: string = "Email";
     mobileNoPlaceholder: string = "Mobile Number";
 
+    PaymentCardMonth : number[] = [];
+    PaymentCardYear: number[] = [];
+    paymentMethod :  string | null | undefined;
+    startMonth:  number = new Date().getMonth() + 1;
+    // In your component where payment method is selected
+
+
     readonly states: string[] = [
       'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 
       'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 
@@ -43,13 +52,16 @@ export class CheckoutComponent implements OnInit {
     constructor(private FormBuilder: FormBuilder,
             private router: Router,
             private checkOutService :  CheckOutServicesService,
-            private paymentServices: PaymentService
+            private paymentServices: PaymentService,
+            private shopChatService: ShopchatService
     ){ }
 
     ngOnInit(): void {
+  
         this.checkOutFormGroup = this.FormBuilder.group({
             selectedOption: ['hide'],
             selectedPaymentMethod : ['upi'],
+            
             customer: this.FormBuilder.group({
               firstName: ['',Validators.required],
               lastName: ['',Validators.required],
@@ -81,8 +93,8 @@ export class CheckoutComponent implements OnInit {
               debitCardNumber : [''],
               cvv: [''],
               pin: [''],
-              validFrom:[''],
-              validTill: ['']
+              expirationMonth:[''],
+              expirationYear: ['']
             }),
             creditCard: this.FormBuilder.group({
               creditCardType: [''],
@@ -90,13 +102,69 @@ export class CheckoutComponent implements OnInit {
               creditCardNumber: [''],
               cvv: [''],
               pin: [''],
-              validFrom:[''],
-              validTill: ['']
+              expirationMonth:[''],
+              expirationYear: ['']
             })
         });
+        // Set the initial payment method in the service
+        const selectedPaymentMethod = this.checkOutFormGroup.get('selectedPaymentMethod')?.value;
+        this.paymentServices.setSelectedPaymentMethod(selectedPaymentMethod);  // Update the service with the initial value
+
+        // Subscribe to changes in the payment method control and update the service accordingly
+        this.checkOutFormGroup.get('selectedPaymentMethod')?.valueChanges.subscribe(value => {
+          this.paymentServices.setSelectedPaymentMethod(value);
+        });
+        this.paymentServices.selectedPaymentMethod$.subscribe(value => {
+          this.paymentMethod = value;
+          console.log(`Payment Method : ${this.paymentMethod}`);
+        });
         this.checkOutService.setCheckOutFormGroup(this.checkOutFormGroup);
+        this.shopChatService.getPaymentCardYear().subscribe(value=>{
+          console.log(`PaymentCardYear : ${value}`);
+          this.PaymentCardYear =value;
+        });
+        this.shopChatService.getPaymentCardMonths(this.startMonth).subscribe(
+          value=>{
+          console.log(`PaymentCardMonths : ${value}`);
+          this.PaymentCardMonth = value;
+        })
+    }
+    handleMonthsAndYear() {
+      let startYear = new Date().getFullYear();
+      let startMonth = new Date().getMonth() + 1;
+      
+      console.log(`Inside handleMonthsAndYear() method ${this.paymentMethod}`)
+      if(this.paymentMethod == 'debitCard'){
+        
+        let expirationYear = this.checkOutFormGroup.get('debitCard')?.get('expirationYear')?.value;
+        console.log(`Current year selected: ${expirationYear}, Start Year: ${startYear}`);
+        if(expirationYear == startYear) {
+          startMonth = new Date().getMonth() + 1; // Set startMonth to the current month
+        } else {
+          startMonth = 1; // Reset startMonth to 1 if it's not the current year
+        }
+        this.shopChatService.getPaymentCardMonths(startMonth).subscribe(
+          value=>{
+          console.log(`PaymentCardMonths : ${value}`);
+          this.PaymentCardMonth = value;
+        })
+      }else if(this.paymentMethod == 'creditCard') {
+        let expirationYear = this.checkOutFormGroup.get('creditCard')?.get('expirationYear')?.value;
+        
+        console.log(`Current year selected: ${expirationYear}, Start Year: ${startYear}`);
+        if (expirationYear == startYear) {
+          startMonth = new Date().getMonth() + 1; // Set startMonth to the current month
+        } else {
+          startMonth = 1; // Reset startMonth to 1 if it's not the current year
+        }
+        this.shopChatService.getPaymentCardMonths(startMonth).subscribe(
+          value=>{
+          console.log(`PaymentCardMonths : ${value}`);
+          this.PaymentCardMonth = value;
+        })
     }
     
+    }
     onSubmit() {
       console.log('handling submitted data');
       console.log(this.checkOutFormGroup.get('customer')?.value);

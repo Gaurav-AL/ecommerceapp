@@ -1,28 +1,4 @@
-/* h4,h2,h3,a{
-    text-decoration: none;
-    font-family: 'Courier New', Courier, monospace;
-}
-a{
-    text-decoration: none;
-}
-h1{
-    text-decoration: none;
-    font-size: large;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bolder;
-}
 
-.btn-primary {
-    background-color: #003366;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #ff6347;
-} */
 .detail-section {
     background-color: #f9f9f9; /* Light background for contrast */
     padding: 20px;
@@ -37,12 +13,17 @@ h1{
 }
 
 .detail-img {
-    max-width: 100%; /* Responsive image */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Rounded corners for image */
-    margin-bottom: 20px; /* Spacing below the image */
+    width: 100%; /* Set the image to take full width of the container */
+    height: auto; /* Maintain the aspect ratio */
+    transition: transform 0.3s ease; /* Smooth animation for scaling */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for depth */
 }
 
+.detail-img:hover {
+    transform: scale(1.1); /* Slightly enlarge the image on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow for a popping effect */
+}
 h3 {
     font-size: 24px; /* Larger font size for the product name */
     color: #333; /* Dark text for better readability */

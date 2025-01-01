@@ -84,9 +84,7 @@ h6{
     font-size:13px
 }
 
-a{
-    display:inline-block
-}
+
 
 a:active,a:focus,a:hover{
     text-decoration:none;
@@ -107,12 +105,14 @@ a,a:hover{
 
 .page-wrapper{
     overflow:hidden;
-    background:#e5e5e5;
-    padding-bottom:8vh
+    background:#245007;
+    padding-bottom:0px;
+    display: flex;
+    margin-bottom: 0%;
 }
 
 .page-container{
-    background:#e5e5e5;
+    background:#85e347;
     padding-left:200px
 }
 
@@ -135,22 +135,22 @@ aside.menu-sidebar.d-none.d-lg-block.clr{
  */
 
 .header-desktop{
-    background:#0da8e4;
+    background-color:inherit;
     -webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     -moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
-    position:fixed;
+    position:relative;
     top:0;
     right:0;
-    left:200px;
-    height:75px;
+    left:auto;
+    height:50px;
     z-index:3
 }
 
 .header-desktop .section-content{
     overflow:visible;
     position:absolute;
-    top:50%;
+    top:10%;
     left:0;
     right:0;
     -webkit-transform:translateY(-50%);
@@ -160,7 +160,7 @@ aside.menu-sidebar.d-none.d-lg-block.clr{
     transform:translateY(-50%)
 }
 
-.header-wrap{
+/* .header-wrap{
     display:-webkit-box;
     display:-webkit-flex;
     display:-moz-box;
@@ -176,6 +176,77 @@ aside.menu-sidebar.d-none.d-lg-block.clr{
     -moz-box-pack:justify;
     -ms-flex-pack:justify;
     justify-content:space-between
+} */
+
+/* .header-wrap {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    gap: 0px; 
+} */
+/*
+/* Constrain child elements within header */
+/* .header-wrap > * {
+    flex-shrink: 0; 
+    flex-grow: 0; 
+    max-width: 50%; 
+    min-width: 0; 
+    overflow: hidden; 
+}  */
+.header-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Ensure the header stretches across the full width */
+    gap: 0px; /* Optional: Adds space between items instead of excessive margins */
+}
+
+/* Constrain child elements within header */
+.header-wrap > * {
+    flex-shrink: 0; /* Prevent items from shrinking unnecessarily */
+    flex-grow: 0; /* Prevent items from growing more than their content */
+}
+
+/* Specific styles for individual components */
+.section-content-logo,
+.section-content-cart-status,
+.section-content-login {
+    flex: 0 0 10%; /* These will each take 10% of the header */
+}
+
+.section-content-search {
+    flex: 0 0 70%; /* The search bar will take 70% of the header */
+}
+
+/* Optional: For responsive design, stack components vertically on smaller screens */
+@media (max-width: 768px) {
+    .header-wrap {
+        flex-direction: column; /* Stack components vertically on smaller screens */
+        align-items: stretch; /* Make items stretch to full width */
+    }
+
+    .section-content-logo,
+    .section-content-search,
+    .section-content-cart-status,
+    .section-content-login {
+        flex: 1 0 100%; /* Each component will take 100% of the width */
+        margin-bottom: 10px; /* Adds space between stacked components */
+    }
 }
 
 .header-button{
@@ -211,12 +282,10 @@ section{
 }
 
 .section-content-p30{
-    padding:0 30px
+    padding:0 0px
 }
 
-.au-input-xl{
-    min-width:935px
-}
+
 
 input.au-input.au-input-xl{
     border-radius:40px!important;
@@ -276,7 +345,7 @@ input.au-input.au-input-xl{
     display:-webkit-flex;
     display:-moz-box;
     display:-ms-flexbox;
-    display:flex
+    
 }
 
 .au-btn-submit{
@@ -834,7 +903,7 @@ footer ul li{
         background:#fff
     }
     .header-wrap .account-item>.content{
-        display:none
+        display:contents;
     }
 }
 

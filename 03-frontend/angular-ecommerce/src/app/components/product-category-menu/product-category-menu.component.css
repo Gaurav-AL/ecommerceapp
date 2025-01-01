@@ -1,18 +1,73 @@
-li{
-    text-decoration: none;
-    font-size: large;
-    font-family: 'Courier New', Courier, monospace;
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-a{
-    text-decoration: none;
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
 }
-.menu-sidebar-content{
-    /* background-color:rgb(91, 100, 9); */
-    background-color: transparent;
-    /* border: 2px solid #003366; */
-    color: #003366;
-    padding: 10px 20px;
-    /* border-radius: 5px; */
-    transition: background-color 0.3s ease;
-    font-weight: bolder;
+
+/* Sidebar Menu */
+.menu-sidebar-content {
+    position: relative;
+}
+
+/* Dropdown Button */
+.dropdown {
+    position: relative; /* Relative to ensure dropdown-menu is positioned correctly */
+    display: inline-block;
+    background-color: #bbecbc;
+}
+
+.dropdown-toggle {
+    background-color: #bbeba7; /* Green background */
+    color: rgb(63, 101, 3);
+    padding: 8px 12px; /* Adjust padding for spacing */
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block; /* Ensure button stays inline with content */
+}
+
+.dropdown-toggle:hover {
+    background-color: #06f512cf; /* Slightly darker green on hover */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #62f507;
+    min-width: 200px; /* Ensure the dropdown has a reasonable width */
+    max-height: 300px; /* Limit dropdown height */
+    overflow-y: auto; /* Scroll if content overflows */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-radius: 5px;
+    top: 100%; /* Position dropdown below the button */
+}
+
+.dropdown-menu.show {
+    display: block; /* Display the menu when the class 'show' is added */
+}
+
+.dropdown-menu li {
+    padding: 8px 12px;
+}
+
+.dropdown-menu li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f1f1f1;
 }

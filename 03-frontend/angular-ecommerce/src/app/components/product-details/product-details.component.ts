@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CartItems } from '../../common/cart-items';
 import { CartService } from '../../services/cart.service';
+import { ReviewOrderComponent } from "../review-order/review-order.component";
+import { ProductReviewsComponent } from "../product-reviews/product-reviews.component";
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, RouterModule,HttpClientModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, ReviewOrderComponent, ProductReviewsComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
   providers: [ProductService] 

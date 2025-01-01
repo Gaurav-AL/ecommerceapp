@@ -97,14 +97,40 @@ body {
 }
 
 /* Empty Cart Message */
+
 .empty-cart-message {
-    text-align: center;
-    font-size: 24px;
-    color: #ff4d4d;
+    color: #f0e8e8; /* Green color to indicate success */
+    font-size: 1.8rem;
     font-weight: bold;
-    margin: 20px 0;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ea5656; /* Light green background */
+    border: 2px solid #e095d1;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(225, 9, 9, 0.1); /* Soft shadow */
+animation: fadeIn 1s ease-in-out, bounce 0.5s 1.5s; /* Fades in and then gives a slight bounce */
 }
 
+@keyframes fadeIn {
+from {
+    opacity: 0;
+    transform: scale(0.95);
+}
+to {
+    opacity: 1;
+    transform: scale(1);
+}
+}
+
+@keyframes bounce {
+0%, 100% {
+    transform: translateY(0);
+}
+50% {
+    transform: translateY(-5px);
+}
+}
 /* Back to Home Page Button */
 .primary-btn {
     display: inline-block;

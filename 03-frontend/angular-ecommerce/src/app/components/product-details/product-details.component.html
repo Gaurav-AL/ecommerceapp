@@ -10,6 +10,9 @@
         <hr>
         <h1>Description</h1>
         <h4>{{ products?.description }} </h4>
+        <div>
+            <app-product-reviews></app-product-reviews>
+        </div>
         <a [routerLink]="[ '/products']" class="primary-btn">Back to Home Page</a>
     </div>
 </div>

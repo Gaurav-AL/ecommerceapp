@@ -5,49 +5,81 @@
 
 <!-- Actual Development process coding starts below -->
 
-<div class="page-wrapper">
-  <!-- MENU SIDEBAR-->
-  <aside class="menu-sidebar d-none d-lg-block">
-    <div class="logo">
-      <a [routerLink]="[ '/products']">
-        <img
-          src="assets/images/logo.png"
-          alt="ShopChat"
-          class="img-responsive"
-        />
-      </a>
-    </div>
-    <app-product-category-menu></app-product-category-menu>
 
-  </aside>
+<!-- <app-product-category-menu></app-product-category-menu> -->
+
   <!-- END MENU SIDEBAR-->
 
   <!-- PAGE CONTAINER-->
-  <div class="page-container">
     <!-- HEADER DESKTOP-->
-    <header class="header-desktop" [ngClass]="{'header-hidden': !isHeaderVisible}">
-      <div class="section-content section-content-p30">
-        <div class="container-fluid">
-          <div class="header-wrap">
-            <app-search></app-search>
-            <app-cart-status></app-cart-status>
-          </div>
-          <div class="account-wrap"></div>
-        </div>
+<header [ngClass]="{'header-hidden': !isHeaderVisible}">
+  <div class="container-fluid">
+    <div class="header-wrap">
+        <app-logo></app-logo>
+        <app-search></app-search>
+        <app-product-category-menu></app-product-category-menu>
+        <app-cart-status></app-cart-status>
+        <app-login></app-login>
       </div>
-    </header>
-    <!-- END HEADER DESKTOP-->
-    <!-- MAIN CONTENT -->
-    <!-- <app-product-list></app-product-list> -->
-    <router-outlet></router-outlet>
-  </div>
-</div>
+    </div>
+</header>
+<router-outlet></router-outlet>
 <!-- END PAGE CONTAINER-->
 
-<footer>
-  <ul>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Contact Us</a></li>
-    <li><a href="#">Help</a></li>
-  </ul>
+<div >
+<footer style="background-color: #000; color: #fff; padding: 40px 20px; font-family: Arial, sans-serif; border-top: 1px solid #333;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+    
+    <!-- Logo and About Section -->
+    <div style="flex: 1; min-width: 250px; text-align: center;">
+      <h3 style="font-size: 24px; margin-bottom: 10px; color: #fff;">ShopChat</h3>
+      <p style="font-size: 14px; line-height: 1.8; color: #bbb;">
+        Your one-stop shop for everything you need! Shop, chat, and connect seamlessly.
+      </p>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div style="flex: 1; min-width: 250px; text-align: center;">
+      <h4 style="font-size: 18px; margin-bottom: 10px; color: #fff;">Quick Links</h4>
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; color: #bbb; line-height: 2;">
+        <li><a href="#home" style="text-decoration: none; color: #00bfff;">Home</a></li>
+        <li><a href="#about" style="text-decoration: none; color: #00bfff;">About Us</a></li>
+        <li><a href="#products" style="text-decoration: none; color: #00bfff;">Products</a></li>
+        <li><a href="#contact" style="text-decoration: none; color: #00bfff;">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Media Section -->
+    <div style="flex: 1; min-width: 250px; text-align: center;">
+      <h4 style="font-size: 18px; margin-bottom: 10px; color: #fff;">Follow Us</h4>
+      <div>
+        <!-- Facebook Icon -->
+        <a href="https://facebook.com" target="_blank" style="margin: 0 10px; display: inline-block;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" 
+              alt="Facebook" 
+              style="width: 32px; height: 32px;">
+        </a>
+        <!-- Twitter Icon -->
+        <a href="https://twitter.com" target="_blank" style="margin: 0 10px; display: inline-block;">
+          <img src="https://upload.wikimedia.org/wikipedia/en/6/60/Twitter_Logo_as_of_2021.svg" 
+              alt="Twitter" 
+              style="width: 28px; height: 28px;">
+        </a>
+        <!-- Instagram Icon -->
+        <a href="https://instagram.com" target="_blank" style="margin: 0 10px; display: inline-block;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" 
+              alt="Instagram" 
+              style="width: 28px; height: 28px;">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright Section -->
+  <div style="text-align: center; padding: 10px 0; margin-top: 20px; font-size: 14px; color: #bbb; border-top: 1px solid #333;">
+    © 2024 ShopChat. All rights reserved.
+  </div>
 </footer>
+</div>
+
+

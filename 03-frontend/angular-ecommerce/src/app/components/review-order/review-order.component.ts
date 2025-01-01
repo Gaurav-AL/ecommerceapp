@@ -100,11 +100,11 @@ export class ReviewOrderComponent implements OnInit{
     }else if(this.paymentMethod == 'debitCard'){
         this.cardNumber = this.checkOutFormGroup?.get('debitCard')?.value?.debitCardNumber;
         this.cardNumber.slice(0,8);
-        this.paymentDetails = this.cardNumber;
+        this.paymentDetails = '********'+this.cardNumber;
     }else{
       this.cardNumber = this.checkOutFormGroup?.get('creditCard')?.value?.creditCardNumber;
         this.cardNumber.slice(0,8);
-        this.paymentDetails = this.cardNumber;
+        this.paymentDetails = '********'+this.cardNumber;
     }
     console.log(`Payment Details : ${this.paymentDetails}`);
   }

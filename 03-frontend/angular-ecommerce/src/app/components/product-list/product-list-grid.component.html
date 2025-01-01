@@ -1,63 +1,59 @@
+<!-- Product Category Menu -->
 <div class="main-content">
-    <div class="section-content section-content-p30">
-        <div class="container-fluid">
-            <h4>Category : {{ currentCategory }}</h4>
+    <div class="section-content">
+        <div class="section-content-p30">
+            <!-- Product Listing -->
+            <!-- <app-product-category-menu></app-product-category-menu> -->
             <div class="row">
-            <!-- loop over the content of the row of Products-->
-            <div *ngFor="let tproducts of Products" class="col-md-3">
-                <div class="product-box">
-                    <a [routerLink]="[ '/products', tproducts.id  ]">
-                        <img src="{{ tproducts.imageUrl }}" class="image-responsive" />
-                    </a>
-                    <a [routerLink]="[ '/products', tproducts.id  ]">
-                        <h1>{{ tproducts.name }}</h1>
-                    </a>
-                    <div class="price">
-                        {{ tproducts.unitPrice | currency : "INR" }}
-                    </div>
-                    <button (click)="addToCart(tproducts)" class="btn btn-primary sm mt-7" style="color:black;background-color:#61e311;; font-family:'Courier New', Courier, monospace;font-weight:bolder;padding:5px">Add to Cart</button>
+                <div *ngFor="let tproducts of Products" class="col-md-3 product-item">
+                    <div class="product-box">
+                        <a [routerLink]="['/products', tproducts.id]">
+                            <img src="{{ tproducts.imageUrl }}" class="image-responsive" />
+                        </a>
+                        <a [routerLink]="['/products', tproducts.id]">
+                            <h1>{{ tproducts.name }}</h1>
+                        </a>
+                        <div class="price-button-container">
+                            <div class="price">
+                                {{ tproducts.unitPrice | currency : 'INR' }}
+                            </div>
+                            <button (click)="addToCart(tproducts)" class="btn btn-primary sm mt-7">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>                    
                 </div>
             </div>
+
+            <!-- No Products Found -->
+            <div *ngIf="Products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                No Products Found <span>{{ searchKeyword }}</span> :(
             </div>
-            <!-- If products are empty we handle it here -->
-            <div
-                *ngIf="Products?.length == 0"
-                class="alert alert-warning col-md-12"
-                role="alert">
-                No Products Found  <span>{{ searchKeyword }}</span> :(
-            </div>
-            <!-- Begin Footer -->
+
             <!-- Pagination -->
             <div class="footer-pagination">
                 <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-9" style="padding:30%">
-                                <ngb-pagination [(page)]="pageNumber"
-                                                [collectionSize]="totalElements"
-                                                [pageSize]="pageSize"
-                                                [maxSize]="5"
-                                                [boundaryLinks]="true"
-                                                (pageChange)="listProducts()">
+                    <div class="col-md-9 offset-md-3">
+                        <ngb-pagination [(page)]="pageNumber" 
+                                        [collectionSize]="totalElements"
+                                        [pageSize]="pageSize"
+                                        [maxSize]="5"
+                                        [boundaryLinks]="true"
+                                        (pageChange)="listProducts()">
+                        </ngb-pagination>
+                    </div>
 
-                                </ngb-pagination>
-                            </div>
-                        <div class="col-md-3 mt-2" style="text-align: right;">
-                            <span class="mr-2">Page Size</span>
-                            <select #myPageSize (change)="updatePageSize(myPageSize.value)">
-                                <option select="true">5</option>
-                                <option select="true">10</option>
-                                <option select="true">15</option>
-                                <option select="true">30</option>
-                            </select>
-
-                        </div>
-                        </div>
+                    <div class="col-md-3 mt-2" style="text-align: right;">
+                        <span class="mr-2">Page Size</span>
+                        <select #myPageSize (change)="updatePageSize(myPageSize.value)">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <!-- End Footer -->
         </div>
     </div>
 </div>

@@ -1,12 +1,17 @@
-<!-- <p>product-category-menu works!</p> -->
-<div class="menu-sidebar-content" >
-    <nav style="background-color: transparent;">
-    <ul class="list-unstyled ">
-
-        <li *ngFor="let tProductCategory of productCategories">
-            <a [routerLink]="['/category', tProductCategory.id ]">{{ tProductCategory.categoryName }}</a>
-        </li>
-        
-    </ul>
-</nav>
+<div class="container-fluid">
+    <div class="dropdown">
+        <div class="dropdown-toggle" (click)="toggleDropdown()">
+            Product Categories
+        </div>
+        <ul class="dropdown-menu" [ngClass]="{ 'show': isDropdownOpen }">
+            <li *ngFor="let tProductCategory of productCategories" (click)="closeDropdown()">
+                <a [routerLink]="['/category', tProductCategory.id]">
+                    {{ tProductCategory.categoryName }}
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
+
+
+

@@ -1,7 +1,7 @@
 <!-- <p>cart-status works!</p>-->
 <div class="cart-area d-n">
     <a [routerLink]="[ '/cart-details' ]">
-        <div class="total"> <span id = "buy">Buy</span>{{ totalPrice | currency:'INR' }} <span> {{ totalQuantity }} </span></div>
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <div class="total"> <span id = "buy">Buy</span>{{ totalPrice | currency:'INR' }} <span id="quantity"> {{ totalQuantity }} </span></div>
+        <i class="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>
     </a>
 </div>

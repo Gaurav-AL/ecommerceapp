@@ -1,0 +1,15 @@
+.search-btn:hover{
+    transform: scale(2.2); /* Magnify the button by 20% */
+    color: #608a0c; /* Optional: Change color on hover */
+    padding: 1%;
+}
+.search-btn{
+    transition: transform 0.6s ease, color 0.6s ease;
+    padding: 1%;
+}
+.form-header-search {
+    display: flex; /* Use flexbox for horizontal layout */
+    align-items: center; /* Vertically align the items to the center */
+    width: 100%; /* Ensure it occupies the full width of its parent container */
+    gap: 10px; /* Space between input and button */
+}

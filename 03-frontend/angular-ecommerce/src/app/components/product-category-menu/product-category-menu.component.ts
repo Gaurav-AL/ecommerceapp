@@ -14,6 +14,15 @@ import { RouterModule } from '@angular/router';
   providers:[ProductService]
 })
 export class ProductCategoryMenuComponent implements OnInit{
+  isDropdownOpen = false;
+
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  closeDropdown(): void {
+      this.isDropdownOpen = false;
+  }
   productCategories: ProductCategory[] = [];
   constructor(private productServices: ProductService){
     

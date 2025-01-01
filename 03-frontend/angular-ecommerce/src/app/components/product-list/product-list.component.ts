@@ -15,11 +15,12 @@ import { get } from 'http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartItems } from '../../common/cart-items';
 import { CartService } from '../../services/cart.service';
+import { ProductCategoryMenuComponent } from "../product-category-menu/product-category-menu.component";
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule,NgbModule,RouterOutlet],
+  imports: [CommonModule, HttpClientModule, RouterModule, NgbModule, RouterOutlet, ProductCategoryMenuComponent],
   // templateUrl: './product-list.component.html',
   // templateUrl: './product-list-table.component.html',
   templateUrl: './product-list-grid.component.html',

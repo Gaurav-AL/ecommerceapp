@@ -1,0 +1,85 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Login Icon Container */
+.login-container {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Slightly increased container width for better proportions */
+    height: 50px;
+}
+
+/* Circular Login Icon */
+.login-icon {
+    width: 45px; /* Increased size for better visibility */
+    height: 45px;
+    background-color: #afecb1; /* Subtle green background */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for a more realistic 3D effect */
+}
+
+.login-icon:hover {
+    background-color: #45a049; /* Slightly darker green for hover effect */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover for depth */
+    transition: transform 0.6s ease, color 0.6s ease;
+}
+
+/* Dropdown Menu */
+.login-dropdown {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for dropdown */
+    overflow: hidden;
+    z-index: 1000;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth fade and slide */
+    transform: translateY(-10px); /* Dropdown starts slightly above */
+}
+
+.login-dropdown.show {
+    display: block;
+    opacity: 1; /* Make dropdown visible */
+    transform: translateY(0); /* Smooth slide into place */
+}
+
+.login-dropdown a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.login-dropdown a:hover {
+    background-color: #f1f1f1; /* Subtle hover effect */
+}
+
+/* Optional: Adjust for mobile responsiveness */
+@media (max-width: 768px) {
+    .login-icon {
+        width: 40px; /* Slightly smaller icon on mobile */
+        height: 40px;
+    }
+
+    .login-dropdown a {
+        padding: 8px 16px; /* Adjust padding for mobile screens */
+    }
+}

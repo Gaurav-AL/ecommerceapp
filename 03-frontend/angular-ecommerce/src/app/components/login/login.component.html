@@ -1,0 +1,14 @@
+<div class="login-container">
+    <!-- Login Icon -->
+    <div class="login-icon" (click)="toggleDropdown()">
+    <i class="fas fa-user"></i> <!-- Font Awesome User Icon -->
+</div>
+
+<!-- Dropdown Menu -->
+<div class="login-dropdown" [ngClass]="{'show': isDropdownOpen}">
+    <a routerLink="/login">Login</a>
+    <a routerLink="/register">Register</a>
+</div>
+</div>
+
+
