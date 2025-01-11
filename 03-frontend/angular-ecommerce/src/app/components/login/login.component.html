@@ -1,14 +1,42 @@
 <div class="login-container">
-    <!-- Login Icon -->
-    <div class="login-icon" (click)="toggleDropdown()">
-    <i class="fas fa-user"></i> <!-- Font Awesome User Icon -->
-</div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label for="username">Username</label>
+    <input id="username" formControlName="username" type="text" class="form-control" placeholder="Enter your username" />
+    </div>
 
-<!-- Dropdown Menu -->
-<div class="login-dropdown" [ngClass]="{'show': isDropdownOpen}">
-    <a routerLink="/login">Login</a>
-    <a routerLink="/register">Register</a>
+    <div class="form-group">
+    <label for="loginType">Login Type</label>
+    <div class="radio-buttons">
+        <label>
+        <input type="radio" formControlName="loginType" value="password" (change)="onLoginTypeChange('password')" /> Password
+        </label>
+        <label>
+        <input type="radio" formControlName="loginType" value="otp" (change)="onLoginTypeChange('otp')" /> OTP
+        </label>
+    </div>
+    </div>
+
+    <div *ngIf="loginForm.get('loginType')?.value === 'password'" class="form-group">
+    <label for="password">Password</label>
+    <input id="password" formControlName="password" type="password" class="form-control" placeholder="Enter your password" />
+    </div>
+
+    <div *ngIf="loginForm.get('loginType')?.value === 'otp'" class="form-group">
+    <label for="otp">OTP</label>
+    <input id="otp" formControlName="otp" type="text" class="form-control" placeholder="Enter OTP" />
+    <button type="button" class="btn btn-primary" (click)="onSendOTP()" [disabled]="!isSendButtonEnabled()">
+        {{ otpButtonLabel }}
+    </button>
+    <div *ngIf="countdown > 0" class="timer">{{ countdown }} seconds remaining</div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid || countdown > 0">
+    Login
+    </button>
+</form>
+
+<div class="register-link">
+    <a href="/register">Don't have an account? Register here</a>
 </div>
 </div>
-
-

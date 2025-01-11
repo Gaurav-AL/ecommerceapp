@@ -12,7 +12,7 @@ import { CheckoutComponent } from '../checkout/checkout.component';
   imports: [CommonModule, HttpClientModule, RouterModule],
   templateUrl: './cart-details.component.html',
   styleUrl: './cart-details.component.css',
-  providers : [CheckoutComponent]
+  providers : [CheckoutComponent,RouterModule,HttpClientModule]
 })
 export class CartDetailsComponent implements OnInit {
 

@@ -51,8 +51,8 @@
                         <div class="col-md-3"><label>Country: </label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="countryName" placeholder="Country">
-                                    <option>India</option>
+                                <select formControlName="countryName" placeholder="Country" (change)="getStates('shippingAddress')">
+                                    <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
                                     <!-- Add more options here -->
                                 </select>
                             </div>
@@ -63,7 +63,7 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select  formControlName="stateName" placeholder="State">
-                                    <<option *ngFor="let state of states" [value]="state">{{ state }}</option>
+                                    <<option *ngFor="let state of states" [ngValue]="state">{{ state.name }}</option>
                                     <!-- Add more options here -->
                                 </select>
                             </div>
@@ -116,8 +116,8 @@
                             <div class="col-md-3"><label>Country: </label></div>
                             <div class="col-md-9">
                                 <div class="input-space">
-                                    <select formControlName="countryName" placeholder="Country">
-                                        <option>India</option>
+                                    <select formControlName="countryName" placeholder="Country" (change)="getStates('billingAddress')">
+                                        <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
                                         <!-- Add more options here -->
                                     </select>
                                 </div>
@@ -128,7 +128,7 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <select formControlName="stateName" placeholder="State">
-                                        <<option *ngFor="let state of states" [value]="state">{{ state }}</option>
+                                        <<option *ngFor="let state of states" [ngValue]="state">{{ state.name }}</option>
                                         <!-- Add more options here -->
                                     </select>
                                 </div>

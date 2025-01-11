@@ -3,12 +3,13 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../common/product';
 import { CommonModule } from '@angular/common';
 import {
+  HttpClient,
   HttpClientModule,
   provideHttpClient,
   withFetch,
 } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, provideRouter, RouterModule, RouterOutlet } from '@angular/router';
 import { ProductCategory } from '../../common/product-category';
 import { SearchComponent } from '../search/search.component';
 import { get } from 'http';
@@ -16,16 +17,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartItems } from '../../common/cart-items';
 import { CartService } from '../../services/cart.service';
 import { ProductCategoryMenuComponent } from "../product-category-menu/product-category-menu.component";
+import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule, NgbModule, RouterOutlet, ProductCategoryMenuComponent],
+  imports: [CommonModule , RouterModule, NgbModule],
   // templateUrl: './product-list.component.html',
   // templateUrl: './product-list-table.component.html',
   templateUrl: './product-list-grid.component.html',
   styleUrl: './product-list.component.css',
-  providers: [ProductService],
+  providers: [
+    ProductService
+  ],
   
 })
 export class ProductListComponent implements OnInit {
@@ -49,7 +53,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private cartServices: CartService
+    private cartServices: CartService,
+    private http: HttpClient
   ) {}
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {

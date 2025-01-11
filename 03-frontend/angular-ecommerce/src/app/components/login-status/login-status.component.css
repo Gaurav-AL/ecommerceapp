@@ -1,0 +1,150 @@
+/* Container styling */
+.login-container {
+position: relative;
+display: inline-block;
+font-family: 'Arial', sans-serif;
+}
+
+.login-icon {
+cursor: pointer;
+color: #4CAF50; /* Green touch for the icon */
+font-size: 24px;
+padding: 10px;
+border-radius: 50%;
+background: linear-gradient(to right, #e8f5e9, #f1f8f6); /* Subtle gradient for the background */
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login-icon:hover {
+background-color: #d9f2dc;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown container styling */
+.login-dropdown {
+position: absolute;
+top: 50px;
+right: 0;
+background: linear-gradient(to bottom, #f8fdf8, #e9f7ea); /* Greenish gradient for the dropdown */
+border: 1px solid #c5e1c7;
+border-radius: 10px;
+box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+width: 220px;
+padding: 15px;
+display: none;
+z-index: 10;
+animation: fadeIn 0.3s ease-out; /* Smooth fade-in effect */
+}
+
+.login-dropdown.show {
+display: block;
+}
+
+/* Dropdown fade-in animation */
+@keyframes fadeIn {
+from {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+/* Authenticated user section */
+.login-status-username {
+text-align: center;
+margin-bottom: 15px;
+}
+
+.login-status-username p {
+font-size: 16px;
+font-weight: bold;
+color: #4CAF50;
+margin: 0 0 10px;
+}
+
+/* Button styling */
+.security-btn {
+display: block;
+width: 90%;
+margin: 8px auto;
+padding: 10px 15px;
+font-size: 14px;
+font-weight: bold;
+border: none;
+border-radius: 5px;
+color: #fff;
+background-color: #4CAF50; /* Green for the buttons */
+cursor: pointer;
+text-align: center;
+text-decoration: none;
+transition: background-color 0.3s, transform 0.2s;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.security-btn:hover {
+background-color: #45a049;
+transform: scale(1.05); /* Slight scaling for hover */
+}
+
+.register-btn {
+background-color: #66BB6A; /* Brighter green for the Register button */
+}
+
+.register-btn:hover {
+background-color: #5DAF63;
+}
+
+/* Logout button */
+.logout-btn {
+display: block;
+width: 90%;
+margin: 8px auto;
+padding: 10px 15px;
+font-size: 14px;
+font-weight: bold;
+border: none;
+border-radius: 5px;
+color: #fff;
+background-color: #e57373; /* Light red for logout */
+cursor: pointer;
+text-align: center;
+transition: background-color 0.3s, transform 0.2s;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn:hover {
+background-color: #d65353;
+transform: scale(1.05);
+}
+
+/* Spacing and alignment for unauthenticated view */
+.login-status-options {
+text-align: center;
+}
+
+.login-status-options button {
+margin: 5px 0;
+}
+
+/* Custom scroll behavior */
+.login-dropdown::-webkit-scrollbar {
+width: 8px;
+}
+
+.login-dropdown::-webkit-scrollbar-track {
+background: #f1f1f1;
+border-radius: 10px;
+}
+
+.login-dropdown::-webkit-scrollbar-thumb {
+background: #81c784; /* Green thumb */
+border-radius: 10px;
+}
+
+.login-dropdown::-webkit-scrollbar-thumb:hover {
+background: #66bb6a;
+}

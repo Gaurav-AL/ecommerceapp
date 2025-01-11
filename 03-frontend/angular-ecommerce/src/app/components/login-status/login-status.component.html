@@ -1,0 +1,18 @@
+<div class="login-container">
+<!-- Login Icon -->
+<div class="login-icon" (click)="toggleDropdown()">
+    <i class="fas fa-user"></i>
+</div>
+
+<!-- Dropdown Menu -->
+<div class="login-dropdown" [ngClass]="{'show': isDropdownOpen}">
+    <div *ngIf="isAuthenticated && userFullName" class="login-status-username">
+    <p>Welcome, {{ userFullName }}</p>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+    <div *ngIf="!isAuthenticated" class="login-status-options">
+    <button [routerLink]="['/login']" class="security-btn">Login</button>
+    <button [routerLink]="['/register']" class="security-btn register-btn">Register</button>
+    </div>
+</div>
+</div>

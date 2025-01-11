@@ -9,15 +9,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from "./components/login/login.component";
 import { LogoComponent } from "./components/logo/logo.component";
+import { LoginStatusComponent } from "./components/login-status/login-status.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductListComponent, HttpClientModule, ProductCategoryMenuComponent, SearchComponent, CartStatusComponent, RouterModule, CommonModule, LoginComponent, LogoComponent],
+  imports: [RouterOutlet, HttpClientModule, ProductCategoryMenuComponent, SearchComponent, CartStatusComponent, RouterModule, CommonModule, LogoComponent, LoginStatusComponent],
   templateUrl: './app.component.html',
   // template: '<router-outlet></router-outlet>',
   styleUrls: ['./app.component.css'],
+  providers:[]
 })
 export class AppComponent {
   title = 'angular-ecommerce';

@@ -55,7 +55,7 @@
                             <label>Total Price</label> : <span>{{ totalPriceDetails | currency :'INR'}}</span> <br>
                             <label>Shipping Charges : <span>FREE</span></label> 
                             <div class="row container-fluid" style="display:right">
-                                <a routerLink="/checkout" class="btn btn-primary sm mt-6" id="checkout"> Check-Out </a>
+                                <a [routerLink]="[ '/checkout']" class="btn btn-primary sm mt-6" id="checkout"> Check-Out </a>
                             </div>
                         </td>
                     </tr>   

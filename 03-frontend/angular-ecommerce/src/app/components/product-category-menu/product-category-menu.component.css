@@ -19,29 +19,29 @@ html, body {
 .dropdown {
     position: relative; /* Relative to ensure dropdown-menu is positioned correctly */
     display: inline-block;
-    background-color: #bbecbc;
+    background-color: transparent;
 }
 
 .dropdown-toggle {
-    background-color: #bbeba7; /* Green background */
+    background-color: transparent; /* Green background */
     color: rgb(63, 101, 3);
     padding: 8px 12px; /* Adjust padding for spacing */
     border: none;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50px;
     display: inline-block; /* Ensure button stays inline with content */
 }
 
 .dropdown-toggle:hover {
-    background-color: #06f512cf; /* Slightly darker green on hover */
+    background-color: transparent; /* Slightly darker green on hover */
 }
 
 /* Dropdown Menu */
 .dropdown-menu {
     display: none; /* Hidden by default */
     position: absolute;
-    background-color: #62f507;
+    background-color: transparent;
     min-width: 200px; /* Ensure the dropdown has a reasonable width */
     max-height: 300px; /* Limit dropdown height */
     overflow-y: auto; /* Scroll if content overflows */
@@ -50,7 +50,7 @@ html, body {
     padding: 0;
     margin: 0;
     list-style: none;
-    border-radius: 5px;
+    border-radius: 10px;
     top: 100%; /* Position dropdown below the button */
 }
 

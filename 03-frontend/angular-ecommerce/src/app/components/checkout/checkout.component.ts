@@ -13,6 +13,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentService } from '../../services/payment.service';
 import { ShopchatService } from '../../services/shopchat.service';
 import { Console } from 'node:console';
+import { Country } from '../../common/country';
+import { State } from '../../common/state';
+
 
 @Component({
   selector: 'app-checkout',
@@ -20,7 +23,7 @@ import { Console } from 'node:console';
   imports: [ReactiveFormsModule, HttpClientModule, CommonModule, FormsModule,RouterModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
-  providers:[]
+  providers:[CheckOutServicesService,PaymentService,ShopchatService]
 })
 export class CheckoutComponent implements OnInit {
     showRadioButtons = false;
@@ -36,17 +39,10 @@ export class CheckoutComponent implements OnInit {
     startMonth:  number = new Date().getMonth() + 1;
     // In your component where payment method is selected
 
-
-    readonly states: string[] = [
-      'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 
-      'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 
-      'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 
-      'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 
-      'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 
-      'West Bengal', 'Andaman and Nicobar Islands', 'Chandigarh', 
-      'Dadra and Nagar Haveli and Daman and Diu', 'Lakshadweep', 'Delhi', 
-      'Puducherry', 'Ladakh', 'Jammu and Kashmir'
-    ];
+    countries: Country[] = [];
+    states: State[] = [];
+  
+    
   
     selectedState: string = ''; // Property to bind selected state
     constructor(private FormBuilder: FormBuilder,
@@ -128,6 +124,11 @@ export class CheckoutComponent implements OnInit {
           console.log(`PaymentCardMonths : ${value}`);
           this.PaymentCardMonth = value;
         })
+        this.shopChatService.getCountries().subscribe(
+          value=>{
+          console.log(`Countries Retrieved: ${value}`);
+          this.countries = value;
+        })
     }
     handleMonthsAndYear() {
       let startYear = new Date().getFullYear();
@@ -196,6 +197,16 @@ export class CheckoutComponent implements OnInit {
     console.log(this.checkOutFormGroup.get('billingAddress')?.value);
     
   }
-
+  getStates(FormGroupName :   string){ 
+    console.log(`FormGroupName : ${FormGroupName}`);
+    const countryCode = this.checkOutFormGroup.get(FormGroupName)?.value.countryName.code ;
+    console.log(`Country Code : ${countryCode}`);
+    this.shopChatService.getStates(countryCode).subscribe(
+      value=>{
+        console.log(`States Retrieved: ${value}`);
+        this.states = value;
+      }
+    )
+  }
 }
 

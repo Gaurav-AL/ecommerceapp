@@ -7,9 +7,15 @@
       "node"
     ]
   },
+  "angularCompilerOptions": {
+    "enableIvy": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+  },
   "files": [
     "src/main.ts",
     "src/main.server.ts",
+    "server.ts",
     "server.ts"
   ],
   "include": [

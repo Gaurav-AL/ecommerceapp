@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductCategory } from '../../common/product-category';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -24,7 +24,7 @@ export class ProductCategoryMenuComponent implements OnInit{
       this.isDropdownOpen = false;
   }
   productCategories: ProductCategory[] = [];
-  constructor(private productServices: ProductService){
+  constructor(private productServices: ProductService,private http: HttpClient){
     
   }
   ngOnInit(): void {

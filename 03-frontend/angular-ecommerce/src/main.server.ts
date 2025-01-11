@@ -4,6 +4,10 @@ import { config } from './app/app.config.server';
 import '@angular/localize/init';
 
 
+
 const bootstrap = () => bootstrapApplication(AppComponent, config);
 
 export default bootstrap;
+
+export class AppServerModule {}
+
