@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ecommerce.ecommerceapp.Services.CustomUserDetails;
 // import com.example.ecommerce.ecommerceapp.Services.CustomUserDetails;
 import com.example.ecommerce.ecommerceapp.Services.CustomUserDetailsService;
 import com.example.ecommerce.ecommerceapp.Services.SessionService;
@@ -37,9 +38,7 @@ public class LoginController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    // @Autowired
-    // private UserDetailsServiceImpl userDetailsServiceImp;
-
+    @Autowired
     private SessionService sessionService;
 
     @PostMapping("/login")
@@ -48,50 +47,40 @@ public class LoginController {
         String password = request.get("password");
 
         try {
+            // Authenticate user
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+
+            // Load user details
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+
+            if (userDetails instanceof CustomUserDetails) {
+                User user = ((CustomUserDetails) userDetails).getUser(); // Get full user entity
+
+                // Generate JWT token
+                String jwt = jwtUtil.generateToken(user.getEmail());
+
+                // Create session
+                try{
+                    sessionService.createSession(user,jwt, LocalDateTime.now(),LocalDateTime.now().plusHours(10));
+                }catch(Exception e){
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
+                }
+                // Return response
+                return ResponseEntity.ok(Map.of(
+                        "token", jwt,
+                        "userId", user.getId(),
+                        "email", user.getEmail(),
+                        "name", user.getFirstName()));
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User details could not be retrieved");
+            }
         } catch (BadCredentialsException e) {
-            throw new RuntimeException("Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-        String jwt = jwtUtil.generateToken(userDetails.getUsername());
-
-        return  ResponseEntity.ok(Map.of(
-                            "token", jwt
-                            // "userId", user.getId(),
-                            // "email", user.getEmail(),
-                            // "name", user.getFirstName()
-                            ));
-
-        // try {
-        //     // Authenticate user
-        //     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-
-        //     // Load user details
-        //     UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-
-        //     if (userDetails instanceof CustomUserDetails) {
-        //         User user = ((CustomUserDetails) userDetails).getUser(); // Get full user entity
-
-        //         // Generate JWT token
-        //         String jwt = jwtUtil.generateToken(user.getEmail());
-
-        //         // Return response
-        //         return ResponseEntity.ok(Map.of(
-        //                 "token", jwt,
-        //                 "userId", user.getId(),
-        //                 "email", user.getEmail(),
-        //                 "name", user.getFirstName()));
-        //     } else {
-        //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User details could not be retrieved");
-        //     }
-        // } catch (BadCredentialsException e) {
-        //     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        // } catch (UsernameNotFoundException e) {
-        //     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-        // } catch (Exception e) {
-        //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
-        // }
     }
 
     @PostMapping("/logout")

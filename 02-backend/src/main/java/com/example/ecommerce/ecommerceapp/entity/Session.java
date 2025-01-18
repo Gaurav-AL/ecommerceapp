@@ -12,9 +12,6 @@ public class Session {
     @Column(name = "session_id",nullable = false)
     private Long sessionId;
 
-    @Column(name = "user_id",nullable = false)
-    private Long userId;
-
     @Column(name = "token",nullable = false)
     private String token;
 
@@ -33,20 +30,16 @@ public class Session {
     @Column(name = "last_updated", updatable = false)
     private LocalDateTime lastUpdated;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false) // Foreign key column
+    private User user; // Link to the User entity
+
     public Long getSessionId() {
         return sessionId;
     }
 
     public void setSessionId(Long sessionId) {
         this.sessionId = sessionId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getToken() {
@@ -67,6 +60,22 @@ public class Session {
 
     public LocalDateTime getExpiresAt() {
         return expiresAt;
+    }
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public void setExpiresAt(LocalDateTime expiresAt) {
@@ -101,6 +110,12 @@ public class Session {
                 && !isRevoked;
     }
 
-    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     
 }

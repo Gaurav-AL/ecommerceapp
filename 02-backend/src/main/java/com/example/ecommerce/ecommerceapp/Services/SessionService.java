@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ecommerce.ecommerceapp.dao.SessionRepository;
 import com.example.ecommerce.ecommerceapp.entity.Session;
+import com.example.ecommerce.ecommerceapp.entity.User;
+import com.example.ecommerce.ecommerceapp.dao.UserRepository;
 
 @Service
 public class SessionService {
@@ -16,15 +18,28 @@ public class SessionService {
     @Autowired
     private SessionRepository sessionRepository;
 
+    @Autowired
+    private UserRepository userRepository;
 
-    public void createSession(Long userId, String token, LocalDateTime issuedAt, LocalDateTime expiresAt) {
+
+    public void createSession(User user, String token, LocalDateTime issuedAt, LocalDateTime expiresAt) {
+
+        User user_ = userRepository.findByID(user.getId());
+        if(user_ == null)
+            throw new RuntimeException("User Not Found with Id :" + user.getId());
+        // Create a new Session and set its fields
         Session session = new Session();
-        session.setUserId(userId);
         session.setToken(token);
         session.setIssuedAt(issuedAt);
         session.setExpiresAt(expiresAt);
+        session.setDateCreated(LocalDateTime.now());
         session.setIsActive(true); // New session is active by default
         session.setIsRevoked(false); // New session is not revoked
+
+        // Associate the session with the user
+        session.setUser(user_);
+
+        // Save the session
         sessionRepository.save(session);
     }
 

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.util.List;
 import java.time.LocalDate;
 
 @Entity
@@ -46,6 +46,9 @@ public class User {
     @Column(name = "password", nullable = false)
     @JsonIgnore
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Session> sessions; // List of sessions associated with this user
 
     @PrePersist
     public void onCreate() {
@@ -88,7 +91,6 @@ public class User {
         this.lastName = lastName;
     }
 
-   
     public String getMiddleName() {
         return middleName;
     }
@@ -124,7 +126,6 @@ public class User {
         this.contactNo = contactNo;
     }
 
-   
     public LocalDateTime getDateCreated() {
         return dateCreated;
     }
@@ -151,7 +152,8 @@ public class User {
         this.password = password;
     }
 
-
-    // Getters and Setters
+    public List<Session> getSessions() {
+        return sessions;
+    }
 }
 
