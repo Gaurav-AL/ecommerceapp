@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
@@ -16,7 +16,9 @@ export class PurchaseComponent implements OnInit{
   subscriptionTotalQuantity: any;
   totalPrice: any;
   totalQuantity: any;
-  constructor(private cartService: CartService){}
+  constructor(private cartService: CartService,
+              private http : HttpClient
+  ){}
   ngOnInit(): void {
     this.cartService.resetData();
   }

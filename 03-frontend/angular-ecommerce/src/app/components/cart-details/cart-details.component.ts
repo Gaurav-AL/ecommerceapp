@@ -20,7 +20,9 @@ export class CartDetailsComponent implements OnInit {
     cartItems: CartItems[] | undefined = [];
     totalPriceDetails: number = 0.00;
     totalQuantityDetails: number = 0;
-    constructor(private cartService: CartService){}
+    constructor(private cartService: CartService,
+                
+    ){}
   
     ngOnInit(): void {
       this.listCartDetails();

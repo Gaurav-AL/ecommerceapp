@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -20,10 +20,10 @@ import { State } from '../../common/state';
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, CommonModule, FormsModule,RouterModule],
+  imports: [ReactiveFormsModule,  CommonModule, FormsModule,RouterModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
-  providers:[CheckOutServicesService,PaymentService,ShopchatService]
+  providers:[HttpClient]
 })
 export class CheckoutComponent implements OnInit {
     showRadioButtons = false;
@@ -49,7 +49,7 @@ export class CheckoutComponent implements OnInit {
             private router: Router,
             private checkOutService :  CheckOutServicesService,
             private paymentServices: PaymentService,
-            private shopChatService: ShopchatService
+            private shopChatService: ShopchatService,
     ){ }
 
     ngOnInit(): void {
@@ -103,32 +103,33 @@ export class CheckoutComponent implements OnInit {
             })
         });
         // Set the initial payment method in the service
-        const selectedPaymentMethod = this.checkOutFormGroup.get('selectedPaymentMethod')?.value;
-        this.paymentServices.setSelectedPaymentMethod(selectedPaymentMethod);  // Update the service with the initial value
+        const selectedPaymentMethod = this.checkOutFormGroup?.get('selectedPaymentMethod')?.value;
+        this.paymentServices?.setSelectedPaymentMethod(selectedPaymentMethod);  // Update the service with the initial value
 
         // Subscribe to changes in the payment method control and update the service accordingly
-        this.checkOutFormGroup.get('selectedPaymentMethod')?.valueChanges.subscribe(value => {
-          this.paymentServices.setSelectedPaymentMethod(value);
+        this.checkOutFormGroup?.get('selectedPaymentMethod')?.valueChanges.subscribe(value => {
+          this.paymentServices?.setSelectedPaymentMethod(value);
         });
-        this.paymentServices.selectedPaymentMethod$.subscribe(value => {
+        this.paymentServices?.selectedPaymentMethod$.subscribe(value => {
           this.paymentMethod = value;
           console.log(`Payment Method : ${this.paymentMethod}`);
         });
-        this.checkOutService.setCheckOutFormGroup(this.checkOutFormGroup);
-        this.shopChatService.getPaymentCardYear().subscribe(value=>{
+
+        this.shopChatService?.getPaymentCardYear().subscribe(value=>{
           console.log(`PaymentCardYear : ${value}`);
           this.PaymentCardYear =value;
         });
-        this.shopChatService.getPaymentCardMonths(this.startMonth).subscribe(
+        this.shopChatService?.getPaymentCardMonths(this.startMonth).subscribe(
           value=>{
           console.log(`PaymentCardMonths : ${value}`);
           this.PaymentCardMonth = value;
         })
-        this.shopChatService.getCountries().subscribe(
+        this.shopChatService?.getCountries().subscribe(
           value=>{
           console.log(`Countries Retrieved: ${value}`);
           this.countries = value;
         })
+        this.checkOutService?.setCheckOutFormGroup(this.checkOutFormGroup!);
     }
     handleMonthsAndYear() {
       let startYear = new Date().getFullYear();
@@ -137,20 +138,20 @@ export class CheckoutComponent implements OnInit {
       console.log(`Inside handleMonthsAndYear() method ${this.paymentMethod}`)
       if(this.paymentMethod == 'debitCard'){
         
-        let expirationYear = this.checkOutFormGroup.get('debitCard')?.get('expirationYear')?.value;
+        let expirationYear = this.checkOutFormGroup?.get('debitCard')?.get('expirationYear')?.value;
         console.log(`Current year selected: ${expirationYear}, Start Year: ${startYear}`);
         if(expirationYear == startYear) {
           startMonth = new Date().getMonth() + 1; // Set startMonth to the current month
         } else {
           startMonth = 1; // Reset startMonth to 1 if it's not the current year
         }
-        this.shopChatService.getPaymentCardMonths(startMonth).subscribe(
+        this.shopChatService?.getPaymentCardMonths(startMonth).subscribe(
           value=>{
           console.log(`PaymentCardMonths : ${value}`);
           this.PaymentCardMonth = value;
         })
       }else if(this.paymentMethod == 'creditCard') {
-        let expirationYear = this.checkOutFormGroup.get('creditCard')?.get('expirationYear')?.value;
+        let expirationYear = this.checkOutFormGroup?.get('creditCard')?.get('expirationYear')?.value;
         
         console.log(`Current year selected: ${expirationYear}, Start Year: ${startYear}`);
         if (expirationYear == startYear) {
@@ -158,7 +159,7 @@ export class CheckoutComponent implements OnInit {
         } else {
           startMonth = 1; // Reset startMonth to 1 if it's not the current year
         }
-        this.shopChatService.getPaymentCardMonths(startMonth).subscribe(
+        this.shopChatService?.getPaymentCardMonths(startMonth).subscribe(
           value=>{
           console.log(`PaymentCardMonths : ${value}`);
           this.PaymentCardMonth = value;
@@ -168,10 +169,10 @@ export class CheckoutComponent implements OnInit {
     }
     onSubmit() {
       console.log('handling submitted data');
-      console.log(this.checkOutFormGroup.get('customer')?.value);
-      const selectedMethod = this.checkOutFormGroup.get('selectedPaymentMethod')?.value;
+      console.log(this.checkOutFormGroup?.get('customer')?.value);
+      const selectedMethod = this.checkOutFormGroup?.get('selectedPaymentMethod')?.value;
       if (selectedMethod) {
-          this.paymentServices.setSelectedPaymentMethod(selectedMethod);
+          this.paymentServices?.setSelectedPaymentMethod(selectedMethod);
       }
       this.router.navigate(['/review-order']);
     }
@@ -184,7 +185,7 @@ export class CheckoutComponent implements OnInit {
     if (scrollPosition > 200) {
       this.showRadioButtons = true;
       if(scrollPosition > 300 && scrollPosition <= 500 ){
-        if(this.checkOutFormGroup.get('selectedOption')?.value === 'hide' ){
+        if(this.checkOutFormGroup?.get('selectedOption')?.value === 'hide' ){
           this.copyShippingAddressToBillingAddress();
         }
       }
@@ -193,15 +194,15 @@ export class CheckoutComponent implements OnInit {
     }
   }
   copyShippingAddressToBillingAddress(){
-    this.checkOutFormGroup.controls['billingAddress'].setValue(this.checkOutFormGroup.controls['shippingAddress'].value);
-    console.log(this.checkOutFormGroup.get('billingAddress')?.value);
+    this.checkOutFormGroup?.controls['billingAddress']?.setValue(this.checkOutFormGroup?.controls['shippingAddress']?.value);
+    console.log(`this.checkOutFormGroup?.get('billingAddress')?.value : ${this.checkOutFormGroup?.get('billingAddress')?.value}`);
     
   }
   getStates(FormGroupName :   string){ 
     console.log(`FormGroupName : ${FormGroupName}`);
-    const countryCode = this.checkOutFormGroup.get(FormGroupName)?.value.countryName.code ;
+    const countryCode = this.checkOutFormGroup?.get(FormGroupName)?.value.countryName.code ;
     console.log(`Country Code : ${countryCode}`);
-    this.shopChatService.getStates(countryCode).subscribe(
+    this.shopChatService?.getStates(countryCode).subscribe(
       value=>{
         console.log(`States Retrieved: ${value}`);
         this.states = value;

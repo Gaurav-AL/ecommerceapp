@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CartItems } from '../common/cart-items';
 import { Subject } from 'rxjs';
 import { couldStartTrivia } from 'typescript';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class CartService {
 
   totalPrice: Subject<number> = new Subject<number>;
   totalQuantity: Subject<number> = new Subject<number>;
-  constructor() { }
+  constructor(private http : HttpClient,
+              
+  ) { }
 
   removeFromCart(cartItem: CartItems){
     let alreadyExistsInCart: boolean = false;

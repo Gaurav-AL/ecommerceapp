@@ -14,6 +14,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReviewOrderComponent } from './components/review-order/review-order.component';
 // import { AuthModule } from '@auth0/auth0-angular';
 import { environment as env } from '../environments/environment';
+import { CheckOutServicesService } from './services/check-out-services.service';
+import { PaymentService } from './services/payment.service';
+import { CartService } from './services/cart.service';
+import { ShopchatService } from './services/shopchat.service';
 
 
 
@@ -40,7 +44,11 @@ import { environment as env } from '../environments/environment';
   providers:[
             HttpClientModule,
             ProductService, 
-            provideHttpClient(withFetch()),
+            CheckOutServicesService,
+            PaymentService,
+            CartService,
+            ShopchatService,
+            provideHttpClient(),
             provideRouter(routes),
             HttpClient
             ]

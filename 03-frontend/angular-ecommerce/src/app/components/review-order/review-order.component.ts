@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckoutComponent } from '../checkout/checkout.component';
@@ -49,61 +49,69 @@ export class ReviewOrderComponent implements OnInit{
     constructor(private checkOutService :  CheckOutServicesService,
                 private cartServices :  CartService,
                 private datePipe: DatePipe,
-                private paymentService: PaymentService
+                private paymentService: PaymentService,
+                private httpClient: HttpClient
   
-    ){}
+    ){
+
+    }
   ngOnInit(): void {
     this.getCurrentDate();
 
-    this.checkOutService.formGroup$.subscribe(formGroup => {
+    this.checkOutService?.formGroup$.subscribe(formGroup => {
+      
+      console.log(`this.checkOutFormGroup = ${formGroup}`);
       if (formGroup) {
         this.checkOutFormGroup = formGroup;
+
+        console.log(`this.checkOutFormGroup = ${this.checkOutFormGroup?.value}`)
       }
     });
 
     /* Customer Information */
-    this.firstName = this.checkOutFormGroup.get('customer')?.value.firstName;
-    this.lastName = this.checkOutFormGroup.get('customer')?.value.lastName;
-    this.email = this.checkOutFormGroup.get('customer')?.value.email;
-    this.mobileno = this.checkOutFormGroup.get('customer')?.value.mobileNo;
+    this.firstName = this.checkOutFormGroup?.get('customer')?.value?.firstName;
+    this.lastName = this.checkOutFormGroup?.get('customer')?.value?.lastName;
+    this.email = this.checkOutFormGroup?.get('customer')?.value?.email;
+    this.mobileno = this.checkOutFormGroup?.get('customer')?.value?.mobileNo;
     this.orderNo = this.getUniqueFourDigitNumber();
     /* Billing variables */
-    this.billingStreetAddress  = this.checkOutFormGroup.get('billingAddress')?.value.streetAddress;
-    this.billingState = this.checkOutFormGroup.get('billingAddress')?.value.stateName;
-    this.billingDistrict = this.checkOutFormGroup.get('billingAddress')?.value.districtName;
-    this.billingCountry = this.checkOutFormGroup.get('billingAddress')?.value.countryName;
-    this.billingPincode = this.checkOutFormGroup.get('billingAddress')?.value.pincode;
+    this.billingStreetAddress = this.checkOutFormGroup?.get('billingAddress.streetAddress')?.value;
+    this.billingState = this.checkOutFormGroup?.get('billingAddress')?.value?.stateName;
+    this.billingDistrict = this.checkOutFormGroup?.get('billingAddress')?.value?.districtName;
+    this.billingCountry = this.checkOutFormGroup?.get('billingAddress')?.value?.countryName;
+    this.billingPincode = this.checkOutFormGroup?.get('billingAddress')?.value?.pincode;
     /* Shipping Variables */
-    this.shippingStreetAddress  = this.checkOutFormGroup.get('shippingAddress')?.value.streetAddress;
-    this.shippingState = this.checkOutFormGroup.get('shippingAddress')?.value.stateName;
-    this.shippingDistrict = this.checkOutFormGroup.get('shippingAddress')?.value.districtName;
-    this.shippingCountry = this.checkOutFormGroup.get('shippingAddress')?.value.countryName;
-    this.shippingPincode = this.checkOutFormGroup.get('shippingAddress')?.value.pincode;
+    this.shippingStreetAddress  = this.checkOutFormGroup?.get('shippingAddress')?.value?.streetAddress;
+    this.shippingState = this.checkOutFormGroup?.get('shippingAddress')?.value?.stateName;
+    this.shippingDistrict = this.checkOutFormGroup?.get('shippingAddress')?.value?.districtName;
+    this.shippingCountry = this.checkOutFormGroup?.get('shippingAddress')?.value?.countryName;
+    this.shippingPincode = this.checkOutFormGroup?.get('shippingAddress')?.value?.pincode;
+    console.log(`this.shippingState : ${this.shippingState}`)
     /*Getting total Price and quantity and first subscriber, then changes with compute total method */
-    this.cartItems = this.cartServices.cartItems;
-    this.cartServices.totalPrice.subscribe(value=>{
+    this.cartItems = this.cartServices?.cartItems;
+    this.cartServices?.totalPrice.subscribe(value=>{
       this.totalPrice = value;
     })
-    this.cartServices.totalQuantity.subscribe(
+    this.cartServices?.totalQuantity.subscribe(
       value=>{
         this.totalQuantity = value;
       }
     );
-    this.cartServices.computeTotal(this.cartItems);
+    this.cartServices?.computeTotal(this.cartItems);
     /**Gathering Payment related Information */
-    this.paymentService.selectedPaymentMethod$.subscribe(value => {
+    this.paymentService?.selectedPaymentMethod$.subscribe(value => {
       this.paymentMethod = value;
     });
     console.log(`Payment Method : ${this.paymentMethod}`);
     if(this.paymentMethod === 'upi'){
-        this.paymentDetails = this.checkOutFormGroup?.get('upi')?.value.upiId;
+        this.paymentDetails = this.checkOutFormGroup?.get('upi')?.value?.upiId;
     }else if(this.paymentMethod == 'debitCard'){
         this.cardNumber = this.checkOutFormGroup?.get('debitCard')?.value?.debitCardNumber;
         this.cardNumber.slice(0,8);
         this.paymentDetails = '********'+this.cardNumber;
     }else{
       this.cardNumber = this.checkOutFormGroup?.get('creditCard')?.value?.creditCardNumber;
-        this.cardNumber.slice(0,8);
+        this.cardNumber?.slice(0,8);
         this.paymentDetails = '********'+this.cardNumber;
     }
     console.log(`Payment Details : ${this.paymentDetails}`);
@@ -127,7 +135,7 @@ export class ReviewOrderComponent implements OnInit{
 
   getCurrentDate() {
     const currentDate = new Date(); // Get current date
-    this.formattedDate = this.datePipe.transform(currentDate, 'MMMM d, y') || ''; // Format date
+    this.formattedDate = this.datePipe?.transform(currentDate, 'MMMM d, y') || ''; // Format date
   }
   
 } 

@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Shipping Details -->
-                <div formGroupName="shippingAddress" class="form-area">
+                <div formGroupName="" class="form-area">
                     <h3>Shipping Address Details</h3>
                     <!-- Shipping Details Fields -->
                     <!-- ... (shipping address fields remain unchanged) -->
@@ -51,8 +51,8 @@
                         <div class="col-md-3"><label>Country: </label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="countryName" placeholder="Country" (change)="getStates('shippingAddress')">
-                                    <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
+                                <select *ngIf="countries!.length > 0" formControlName="countryName" placeholder="Country" (change)="getStates('shippingAddress')">
+                                    <option *ngFor="let country of countries" [ngValue]="country.name">{{ country.name }}</option>
                                     <!-- Add more options here -->
                                 </select>
                             </div>
@@ -62,8 +62,8 @@
                         <div class="col-md-3"><label>State: </label></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select  formControlName="stateName" placeholder="State">
-                                    <<option *ngFor="let state of states" [ngValue]="state">{{ state.name }}</option>
+                                <select *ngIf="states!.length > 0" formControlName="stateName" placeholder="State">
+                                    <<option *ngFor="let state of states" [ngValue]="state?.name">{{ state.name }}</option>
                                     <!-- Add more options here -->
                                 </select>
                             </div>
@@ -106,7 +106,7 @@
                 </div>
 
                 <!-- Conditional Billing Address -->
-                <div *ngIf="checkOutFormGroup.get('selectedOption')?.value === 'show'">
+                <div *ngIf="checkOutFormGroup?.get('selectedOption')?.value === 'show'">
                     <div style="height: 50px;"></div>
                     <div formGroupName="billingAddress" class="form-area">
                         <h3>Billing Address Details</h3>
@@ -116,8 +116,8 @@
                             <div class="col-md-3"><label>Country: </label></div>
                             <div class="col-md-9">
                                 <div class="input-space">
-                                    <select formControlName="countryName" placeholder="Country" (change)="getStates('billingAddress')">
-                                        <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
+                                    <select formControlName="countryName!" placeholder="Country" (change)="getStates('billingAddress')">
+                                        <option *ngFor="let country of countries" [ngValue]="country">{{ country?.name }}</option>
                                         <!-- Add more options here -->
                                     </select>
                                 </div>
@@ -127,8 +127,8 @@
                             <div class="col-md-3"><label>State: </label></div>
                             <div class="col-md-9">
                                 <div class="input-space">
-                                    <select formControlName="stateName" placeholder="State">
-                                        <<option *ngFor="let state of states" [ngValue]="state">{{ state.name }}</option>
+                                    <select formControlName="stateName!" placeholder="State">
+                                        <<option *ngFor="let state of states" [ngValue]="state?.name">{{ state?.name }}</option>
                                         <!-- Add more options here -->
                                     </select>
                                 </div>

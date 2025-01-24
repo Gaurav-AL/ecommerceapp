@@ -34,7 +34,7 @@ export class ShopchatService {
     let data: number[] = [];
 
     for (let theMonth = startMonth; theMonth <= 12; theMonth++) {
-      data.push(theMonth);
+      data?.push(theMonth);
     }
 
     return of(data);
@@ -47,7 +47,7 @@ export class ShopchatService {
     const endYear = startYear + 10;
 
     for (let theYear = startYear; theYear <= endYear; theYear++) {
-      data.push(theYear);
+      data?.push(theYear);
     }
     return of(data);
   }
